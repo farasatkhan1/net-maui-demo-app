@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Settings Page"/>
-            <Label x:Name="DeviceInfoModel" Text="Device Model" />
+            <Label x:Name="DeviceInfoModel" Text="{Binding DeviceModel}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

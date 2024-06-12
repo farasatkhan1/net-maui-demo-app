@@ -1,4 +1,4 @@
-using NetMAUIDemoApp.Interfaces;
+using NetMAUIDemoApp.ViewModels;
 
 namespace NetMAUIDemoApp.Views.dashboard;
 
@@ -8,11 +8,6 @@ public partial class Settings : ContentPage
 	{
         InitializeComponent();
 
-        var dependency = DependencyService.Get<IDeviceInfoService>();
-
-        if (dependency != null)
-        {
-            DeviceInfoModel.Text = dependency.GetDeviceModel();
-        }
+        BindingContext = new SettingsPageViewModel();
     }
 }
