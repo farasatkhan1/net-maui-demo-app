@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NetMAUIDemoApp.Views.dashboard.Home"
+             xmlns:vm="clr-namespace:NetMAUIDemoApp.ViewModels"
+             Title="Home">
+    <ContentPage.BindingContext>
+        <vm:HomePageViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20">
+        <Label Text="Bitcoin Price Index" 
+               FontSize="Large"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+        <Label Text="{Binding UsdPrice}" 
+               FontSize="Medium"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+        <Label Text="{Binding GbpPrice}" 
+               FontSize="Medium"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+        <Label Text="{Binding EurPrice}" 
+               FontSize="Medium"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+        <Button Text="Fetch New Price" 
+                Command="{Binding FetchNewPriceCommand}" 
+                HorizontalOptions="Center"
+                VerticalOptions="Start" />
+    </StackLayout>
+</ContentPage>

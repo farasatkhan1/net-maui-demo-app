@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NetMAUIDemoApp.Views.auth.Login"
+             Title="Login"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.Content>
+        <StackLayout Padding="30" VerticalOptions="CenterAndExpand" Spacing="20">
+
+            <Image Source="logo.jpg"
+               Aspect="AspectFit"
+               HeightRequest="100"
+               HorizontalOptions="Center"/>
+
+            <Label Text="Please login to continue using app"
+               FontSize="18"
+               HorizontalOptions="Center"
+               TextColor="Black"/>
+
+            <Entry x:Name="EmailEntry"
+               Placeholder="Email"
+               Keyboard="Email"
+               TextColor="#333"
+               PlaceholderColor="#999"
+               BackgroundColor="White"
+               HeightRequest="40"
+               Margin="0,5,0,0"
+               />
+
+            <Entry x:Name="PasswordEntry"
+               Placeholder="Password"
+               IsPassword="True"
+               TextColor="#333"
+               PlaceholderColor="#999"
+               BackgroundColor="White"
+               HeightRequest="40"
+               Margin="0,5,0,0"
+               />
+
+            <Button Text="Login"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                FontAttributes="Bold"
+                HeightRequest="50"
+                CornerRadius="25"
+                Margin="0,20,0,0"
+                Clicked="OnLoginButtonClicked"/>
+
+            <Label Text="Create a new account"
+               TextColor="Black"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Margin="0,20,0,0">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSignupButtonClicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

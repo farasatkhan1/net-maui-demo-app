@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NetMAUIDemoApp.Views.auth.onboarding.SignupFlow1"
+             Title="SignupFlow1">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Signup Flow 1"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="label" Text="Data from FromPage" />
+            <Button Text="Go to Flow 2" Clicked="onFlowClicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

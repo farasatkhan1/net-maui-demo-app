@@ -3,13 +3,36 @@
     x:Class="NetMAUIDemoApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:NetMAUIDemoApp"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:auth="clr-namespace:NetMAUIDemoApp.Views.auth"
+    xmlns:dashboard="clr-namespace:NetMAUIDemoApp.Views.dashboard"
     Title="NetMAUIDemoApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellItem>
+        <ShellContent ContentTemplate="{DataTemplate auth:Login}" Route="login" />
+    </ShellItem>
 
+    <ShellItem>
+        <ShellContent ContentTemplate="{DataTemplate auth:Signup}" Route="signup" />
+    </ShellItem>
+
+    <FlyoutItem Title="Home">
+        <Tab Title="Home" Icon="home_icon.png">
+            <ShellContent Route="home" ContentTemplate="{DataTemplate dashboard:Home}" />
+        </Tab>
+        <Tab Title="Search" Icon="search_icon.png">
+            <ShellContent Route="search" ContentTemplate="{DataTemplate dashboard:Search}" />
+        </Tab>
+        <Tab Title="Notifications" Icon="notifications_icon.png">
+            <ShellContent Route="notifications" ContentTemplate="{DataTemplate dashboard:Notifications}" />
+        </Tab>
+        <Tab Title="Profile" Icon="profile_icon.png">
+            <ShellContent Route="profile" ContentTemplate="{DataTemplate dashboard:Profile}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings" Icon="icon_about.png">
+        <ShellContent Route="Settings" ContentTemplate="{DataTemplate dashboard:Settings}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Help" Icon="icon_about.png">
+        <ShellContent Route="Help" ContentTemplate="{DataTemplate dashboard:Help}" />
+    </FlyoutItem>
 </Shell>
