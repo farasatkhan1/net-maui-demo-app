@@ -4,6 +4,7 @@
              x:Class="NetMAUIDemoApp.Views.dashboard.Search"
              xmlns:vm="clr-namespace:NetMAUIDemoApp.ViewModels"
              xmlns:controls="clr-namespace:NetMAUIDemoApp.Controls"
+             x:Name="SearchContent"
              Title="Search">
     <ContentPage.BindingContext>
         <vm:SearchPageViewModel />
@@ -29,7 +30,7 @@
                             <Label Text="{Binding Description}" FontSize="Medium" VerticalOptions="CenterAndExpand"/>
                             <Image Source="delete.jpg" HeightRequest="20" WidthRequest="20" VerticalOptions="Center">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Name=SearchPageContent}, Path=BindingContext.DeleteNoteCommand}" CommandParameter="{Binding .}" />
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Name=SearchContent}, Path=BindingContext.DeleteNoteCommand}" CommandParameter="{Binding .}" />
                                 </Image.GestureRecognizers>
                             </Image>
                         </StackLayout>
