@@ -46,8 +46,7 @@
                 FontAttributes="Bold"
                 HeightRequest="50"
                 CornerRadius="25"
-                Margin="0,20,0,0"
-                Clicked="OnLoginButtonClicked"/>
+                Margin="0,20,0,0"/>
 
             <Label Text="Create a new account"
                TextColor="Black"

@@ -65,6 +65,8 @@ namespace NetMAUIDemoApp.ViewModels.auth
         private async Task SignUp()
         {
             await _firebaseAuthClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+
+            await Shell.Current.GoToAsync("flow1");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

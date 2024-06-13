@@ -20,9 +20,4 @@ public partial class Login : ContentPage
     {
         await Shell.Current.GoToAsync("//signup");
     }
-
-    private async void OnLoginButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//home");
-    }
 }

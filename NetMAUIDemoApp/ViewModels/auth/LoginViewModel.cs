@@ -51,9 +51,18 @@ namespace NetMAUIDemoApp.ViewModels.auth
 
         private async Task SignIn()
         {
-            await _firebaseAuthClient.SignInWithEmailAndPasswordAsync(Email, Password);
-
-            await Shell.Current.GoToAsync("//home");
+            try
+            {
+                var user = await _firebaseAuthClient.SignInWithEmailAndPasswordAsync(Email, Password);
+                if (user != null)
+                {
+                    await Shell.Current.GoToAsync("//home");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Login Failed", ex.Message, "OK");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
