@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Hosting;
 using NetMAUIDemoApp.Controls;
@@ -10,6 +12,8 @@ using NetMAUIDemoApp.Platforms.Android;
 using NetMAUIDemoApp.Platforms.iOS;
 #endif
 using NetMAUIDemoApp.ViewModels;
+using NetMAUIDemoApp.ViewModels.auth;
+using NetMAUIDemoApp.Views.auth;
 using NetMAUIDemoApp.Views.dashboard;
 using System.Security.Cryptography.X509Certificates;
 
@@ -37,7 +41,8 @@ namespace NetMAUIDemoApp
                 })
                 .UseMauiCompatibility()
                 .RegisterServices()
-                .RegisterViewModels();
+                .RegisterViewModels()
+                .RegisterFirebase();
 
             #if DEBUG
                 builder.Logging.AddDebug();
@@ -63,6 +68,9 @@ namespace NetMAUIDemoApp
         {
 
             mauiAppBuilder.Services.AddTransient<SettingsPageViewModel>();
+            mauiAppBuilder.Services.AddTransient<LoginViewModel>();
+            mauiAppBuilder.Services.AddTransient<SignupViewModel>();
+
             return mauiAppBuilder;
         }
 
@@ -70,6 +78,22 @@ namespace NetMAUIDemoApp
         {
 
             mauiAppBuilder.Services.AddTransient<Settings>();
+            mauiAppBuilder.Services.AddTransient<Login>();
+            mauiAppBuilder.Services.AddTransient<Signup>();
+
+            return mauiAppBuilder;
+        }
+
+        public static MauiAppBuilder RegisterFirebase(this MauiAppBuilder mauiAppBuilder)
+        {
+            mauiAppBuilder.Services.AddSingleton(new FirebaseAuthClient(new FirebaseAuthConfig()
+            {
+                ApiKey = "AIzaSyBU01UWZyobEt7vcDfCuDEHXZPOzxLmw4M",
+                AuthDomain = "net-maui-demo-app-firebase.firebaseapp.com",
+                Providers = new FirebaseAuthProvider[] {
+                    new EmailProvider()
+                }
+            }));
             return mauiAppBuilder;
         }
     }

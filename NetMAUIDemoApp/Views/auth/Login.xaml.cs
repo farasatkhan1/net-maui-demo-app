@@ -1,3 +1,5 @@
+using NetMAUIDemoApp.ViewModels.auth;
+
 namespace NetMAUIDemoApp.Views.auth;
 
 public partial class Login : ContentPage
@@ -5,7 +7,14 @@ public partial class Login : ContentPage
 	public Login()
 	{
 		InitializeComponent();
-	}
+
+        HandlerChanged += OnHandlerChanged;
+    }
+
+    void OnHandlerChanged(object sender, EventArgs e)
+    {
+        BindingContext = Handler.MauiContext.Services.GetService<LoginViewModel>();
+    }
 
     private async void OnSignupButtonClicked(object sender, EventArgs e)
     {

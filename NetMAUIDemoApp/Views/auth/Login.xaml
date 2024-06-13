@@ -18,6 +18,7 @@
                TextColor="Black"/>
 
             <Entry x:Name="EmailEntry"
+               Text="{Binding Email}"
                Placeholder="Email"
                Keyboard="Email"
                TextColor="#333"
@@ -28,6 +29,7 @@
                />
 
             <Entry x:Name="PasswordEntry"
+               Text="{Binding Password}"
                Placeholder="Password"
                IsPassword="True"
                TextColor="#333"
@@ -38,6 +40,7 @@
                />
 
             <Button Text="Login"
+                Command="{Binding LoginCommand}"
                 BackgroundColor="#007AFF"
                 TextColor="White"
                 FontAttributes="Bold"
