@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using Firebase.Auth.Providers;
+using Firebase.Auth.Repository;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Hosting;
@@ -92,7 +93,8 @@ namespace NetMAUIDemoApp
                 AuthDomain = "net-maui-demo-app-firebase.firebaseapp.com",
                 Providers = new FirebaseAuthProvider[] {
                     new EmailProvider()
-                }
+                },
+                UserRepository = new FileUserRepository("PersistedUserFirebaseInformation"),
             }));
             return mauiAppBuilder;
         }
