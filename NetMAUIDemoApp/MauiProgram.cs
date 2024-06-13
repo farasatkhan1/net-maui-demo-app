@@ -26,18 +26,18 @@ namespace NetMAUIDemoApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                }).ConfigureMauiHandlers(handlers => {
-                    #if __ANDROID__
-                          handlers.AddCompatibilityRenderer(typeof(CustomButton), typeof(NetMAUIDemoApp.CustomRendererAndroid.CustomButtonRenderer));
-                    #endif
+                }).ConfigureMauiHandlers(handlers =>
+                {
+#if __ANDROID__
+                    handlers.AddCompatibilityRenderer(typeof(CustomButton), typeof(NetMAUIDemoApp.CustomRendererAndroid.CustomButtonRenderer));
+#endif
                     //#if __IOS__
                     //    handlers.AddCompatibilityRenderer(typeof(CustomButton), typeof(DemoShellNavigation.CustomRendererIOS.CustomButtonRenderer));
                     //#endif
                 })
                 .UseMauiCompatibility()
                 .RegisterServices()
-                .RegisterViewModels()
-                .RegisterViews();
+                .RegisterViewModels();
 
             #if DEBUG
                 builder.Logging.AddDebug();

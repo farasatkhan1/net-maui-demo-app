@@ -5,10 +5,15 @@ namespace NetMAUIDemoApp.Views.dashboard;
 public partial class Settings : ContentPage
 {
 
-	public Settings(SettingsPageViewModel viewModel)
+	public Settings()
 	{
         InitializeComponent();
 
-        BindingContext = viewModel;
+        HandlerChanged += OnHandlerChanged;
+    }
+
+    void OnHandlerChanged(object sender, EventArgs e)
+    {
+        BindingContext = Handler.MauiContext.Services.GetService<SettingsPageViewModel>();
     }
 }
