@@ -64,9 +64,27 @@ namespace NetMAUIDemoApp.ViewModels.auth
 
         private async Task SignUp()
         {
-            await _firebaseAuthClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+            try
+            {
+                var user = await _firebaseAuthClient.CreateUserWithEmailAndPasswordAsync(Email, Password, Username);
+                if (user != null)
+                {
+                    var token = await GetAccessToken();
 
-            await Shell.Current.GoToAsync("flow1");
+                    if (!string.IsNullOrEmpty(token))
+                    {
+                        Preferences.Set("accessToken", token);
+                        Preferences.Set("fname", user.User.Info.DisplayName);
+                        Preferences.Set("email", user.User.Info.Email);
+                    }
+
+                    await Shell.Current.GoToAsync("flow1");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Signup Failed", ex.Message, "OK");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -74,6 +92,16 @@ namespace NetMAUIDemoApp.ViewModels.auth
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private async Task<string> GetAccessToken()
+        {
+            if (_firebaseAuthClient.User == null)
+            {
+                return null;
+            }
+
+            return await _firebaseAuthClient.User.GetIdTokenAsync();
         }
     }
 }
