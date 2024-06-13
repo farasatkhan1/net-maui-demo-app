@@ -34,13 +34,13 @@ namespace NetMAUIDemoApp
                 })
                 .UseMauiCompatibility(); ;
 
-#if __ANDROID__
-                            builder.Services.AddTransient<IDeviceInfoService, DeviceInfoService>();
+                #if __ANDROID__
+                    builder.Services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
 
-#endif
-#if __IOS__
-    builder.Services.AddTransient<IDeviceInfoService, DeviceInfoService>();
-#endif
+                #endif
+                #if __IOS__
+                                    builder.Services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
+                #endif
 
 
             builder.Services.AddTransient<SettingsPageViewModel>();
