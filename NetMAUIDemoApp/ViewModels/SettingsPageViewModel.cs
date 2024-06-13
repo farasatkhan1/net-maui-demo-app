@@ -18,17 +18,18 @@ namespace NetMAUIDemoApp.ViewModels
     {
         private readonly IDeviceInfoService _deviceInfoService;
 
-        public SettingsPageViewModel()
+        public SettingsPageViewModel(IDeviceInfoService deviceInfoService)
         {
-#if __ANDROID__
-                    DeviceInfoService deviceInfoService = new DeviceInfoService();
-                    DeviceModel = deviceInfoService.GetDeviceModel();
-#endif
-#if __IOS__
-            DeviceInfoService deviceInfoService = new DeviceInfoService();
-            DeviceModel = deviceInfoService.GetDeviceModel();
-#endif
-
+            _deviceInfoService = deviceInfoService;
+            //#if __ANDROID__
+            //                    DeviceInfoService deviceInfoService = new DeviceInfoService();
+            //                    DeviceModel = deviceInfoService.GetDeviceModel();
+            //#endif
+            //#if __IOS__
+            //            DeviceInfoService deviceInfoService = new DeviceInfoService();
+            //            DeviceModel = deviceInfoService.GetDeviceModel();
+            //#endif
+            DeviceModel = _deviceInfoService.GetDeviceModel();
         }
 
         private string _deviceModel;

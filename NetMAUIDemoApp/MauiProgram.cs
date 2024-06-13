@@ -5,7 +5,11 @@ using NetMAUIDemoApp.Interfaces;
 #if __ANDROID__
 using NetMAUIDemoApp.Platforms.Android;
 #endif
+#if __IOS__
+using NetMAUIDemoApp.Platforms.iOS;
+#endif
 using NetMAUIDemoApp.ViewModels;
+using NetMAUIDemoApp.Views.dashboard;
 
 namespace NetMAUIDemoApp
 {
@@ -21,19 +25,27 @@ namespace NetMAUIDemoApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 }).ConfigureMauiHandlers(handlers => {
-                    #if __ANDROID__
+#if __ANDROID__
                         handlers.AddCompatibilityRenderer(typeof(CustomButton), typeof(NetMAUIDemoApp.CustomRendererAndroid.CustomButtonRenderer));
-                    #endif
+#endif
                     //#if __IOS__
                     //    handlers.AddCompatibilityRenderer(typeof(CustomButton), typeof(DemoShellNavigation.CustomRendererIOS.CustomButtonRenderer));
                     //#endif
                 })
                 .UseMauiCompatibility(); ;
-            #if __ANDROID__
-                        builder.Services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
-            #endif
+
+#if __ANDROID__
+                            builder.Services.AddTransient<IDeviceInfoService, DeviceInfoService>();
+
+#endif
+#if __IOS__
+    builder.Services.AddTransient<IDeviceInfoService, DeviceInfoService>();
+#endif
+
 
             builder.Services.AddTransient<SettingsPageViewModel>();
+            builder.Services.AddTransient<Settings>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

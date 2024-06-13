@@ -4,10 +4,11 @@ namespace NetMAUIDemoApp.Views.dashboard;
 
 public partial class Settings : ContentPage
 {
-	public Settings()
+
+	public Settings(SettingsPageViewModel viewModel)
 	{
         InitializeComponent();
 
-        BindingContext = new SettingsPageViewModel();
+        BindingContext = viewModel;
     }
 }
