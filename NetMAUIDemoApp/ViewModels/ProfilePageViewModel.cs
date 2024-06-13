@@ -40,6 +40,7 @@ namespace NetMAUIDemoApp.ViewModels
 
         private async void OnLogoutButtonClicked()
         {
+            Preferences.Clear();
             await Shell.Current.GoToAsync("//login");
         }
 

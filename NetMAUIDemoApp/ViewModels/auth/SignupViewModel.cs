@@ -19,8 +19,6 @@ namespace NetMAUIDemoApp.ViewModels.auth
         {
             _firebaseAuthClient = firebaseAuthClient;
             SignUpCommand = new Command(async () => await SignUp());
-
-            Task.Run(async () => await CheckIfUserIsLoggedIn());
         }
 
         private string _username;
@@ -104,20 +102,6 @@ namespace NetMAUIDemoApp.ViewModels.auth
             }
 
             return await _firebaseAuthClient.User.GetIdTokenAsync();
-        }
-
-        private async Task CheckIfUserIsLoggedIn()
-        {
-            var token = GetSavedToken();
-            if (!string.IsNullOrEmpty(token))
-            {
-                await Shell.Current.GoToAsync("//home");
-            }
-        }
-
-        private string GetSavedToken()
-        {
-            return Preferences.Get("accessToken", null);
         }
     }
 }
