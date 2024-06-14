@@ -77,14 +77,14 @@
                 Margin="0,20,0,0"
                 Command="{Binding LogoutCommand}"/>
 
-                <Button Text="Firebase Token"
+                <Button Text="Divide By Zero"
                 BackgroundColor="#007AFF"
                 TextColor="White"
                 FontAttributes="Bold"
                 HeightRequest="50"
                 CornerRadius="25"
                 Margin="0,20,0,0"
-                Clicked="OnCounterClicked"/>
+                Clicked="DivideByZero"/>
 
             </StackLayout>
         </StackLayout>
