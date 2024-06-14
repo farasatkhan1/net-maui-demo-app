@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058367324525",
+    "project_id": "net-maui-demo-app-firebase",
+    "storage_bucket": "net-maui-demo-app-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058367324525:android:8bbecd171e376aeeeada64",
+        "android_client_info": {
+          "package_name": "com.netmauidemoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYmFjdDbGLiDj7tbXPXG59s-xrn16Jbhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

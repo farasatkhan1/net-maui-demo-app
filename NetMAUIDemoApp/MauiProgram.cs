@@ -4,6 +4,7 @@ using Firebase.Auth.Repository;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Hosting;
+using Microsoft.Maui.LifecycleEvents;
 using NetMAUIDemoApp.Controls;
 using NetMAUIDemoApp.Interfaces;
 #if __ANDROID__
@@ -16,7 +17,11 @@ using NetMAUIDemoApp.ViewModels;
 using NetMAUIDemoApp.ViewModels.auth;
 using NetMAUIDemoApp.Views.auth;
 using NetMAUIDemoApp.Views.dashboard;
+using Plugin.Firebase.Auth;
+using Plugin.Firebase.Bundled.Shared;
 using System.Security.Cryptography.X509Certificates;
+using Plugin.Firebase.Crashlytics;
+using Plugin.Firebase.Bundled.Platforms.Android;
 
 namespace NetMAUIDemoApp
 {
@@ -91,12 +96,37 @@ namespace NetMAUIDemoApp
             {
                 ApiKey = "AIzaSyBU01UWZyobEt7vcDfCuDEHXZPOzxLmw4M",
                 AuthDomain = "net-maui-demo-app-firebase.firebaseapp.com",
-                Providers = new FirebaseAuthProvider[] {
+                Providers = new Firebase.Auth.Providers.FirebaseAuthProvider[] {
                     new EmailProvider()
                 },
                 UserRepository = new FileUserRepository("PersistedUserFirebaseInformation"),
             }));
             return mauiAppBuilder;
+        }
+
+        private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
+        {
+            builder.ConfigureLifecycleEvents(events =>
+            {
+                #if IOS
+                            events.AddiOS(iOS => iOS.FinishedLaunching((app, launchOptions) => {
+                                CrossFirebase.Initialize(CreateCrossFirebaseSettings());
+                                return false;
+                            }));
+                #else
+                                events.AddAndroid(android => android.OnCreate((activity, _) =>
+                                CrossFirebase.Initialize(activity, CreateCrossFirebaseSettings())));
+                                CrossFirebaseCrashlytics.Current.SetCrashlyticsCollectionEnabled(true);
+                #endif
+            });
+
+            builder.Services.AddSingleton(_ => CrossFirebaseAuth.Current);
+            return builder;
+        }
+        private static CrossFirebaseSettings CreateCrossFirebaseSettings()
+        {
+            return new CrossFirebaseSettings(isAuthEnabled: true,
+            isCloudMessagingEnabled: true, isAnalyticsEnabled: true);
         }
     }
 }
